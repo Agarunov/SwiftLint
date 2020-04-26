@@ -18,6 +18,8 @@ public struct StyleViolation: CustomStringConvertible, Equatable, Codable {
     /// The justification for this violation.
     public let reason: String
 
+    public let additionalInfo: [String: String]
+
     /// A printable description for this violation.
     public var description: String {
         return XcodeReporter.generateForSingleViolation(self)
@@ -32,13 +34,15 @@ public struct StyleViolation: CustomStringConvertible, Equatable, Codable {
     public init(ruleDescription: RuleDescription,
                 severity: ViolationSeverity = .warning,
                 location: Location,
-                reason: String? = nil) {
+                reason: String? = nil,
+                additionalInfo: [String: String] = [:]) {
         self.ruleIdentifier = ruleDescription.identifier
         self.ruleDescription = ruleDescription.description
         self.ruleName = ruleDescription.name
         self.severity = severity
         self.location = location
         self.reason = reason ?? ruleDescription.description
+        self.additionalInfo = additionalInfo
     }
 
     /// Returns the same violation, but with the `severity` that is passed in

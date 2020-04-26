@@ -23,7 +23,8 @@ public struct UnusedImportRule: CorrectableRule, ConfigurationProviderRule, Anal
             StyleViolation(ruleDescription: type(of: self).description,
                            severity: configuration.severity.severity,
                            location: Location(file: file, characterOffset: importUsage.violationRange?.location ?? 1),
-                           reason: importUsage.violationReason)
+                           reason: importUsage.violationReason,
+                           additionalInfo: importUsage.violationAdditionalInfo)
         }
     }
 

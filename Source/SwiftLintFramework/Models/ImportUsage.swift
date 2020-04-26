@@ -26,4 +26,19 @@ enum ImportUsage {
             return "Missing import for referenced module '\(module)'."
         }
     }
+
+    var violationAdditionalInfo: [String: String] {
+        switch self {
+        case .unused(let module, _):
+            return [
+                "type": "unused_import",
+                "module": module
+            ]
+        case .missing(let module):
+            return [
+                "type": "missing_import",
+                "module": module
+            ]
+        }
+    }
 }
